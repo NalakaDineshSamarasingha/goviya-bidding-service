@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: GOVIYA-BIDDING-SERVICE
+  boot:
+    admin:
+      client:
+        url: http://localhost:8082
+        enabled: true
+        auto-registration: true
+  profiles:
+    active: local
+
+server:
+  port: 8082
+  servlet:
+    context-path: /api/goviya-bidding-core
+
+swagger:
+  server-url: http://localhost:8082
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    doc-expansion: none

@@ -1,0 +1,56 @@
+-- MongoDB Schema for Bidding Service
+-- Create the bids collection with indexes
+
+db.createCollection("bids");
+
+-- Create indexes for common queries
+db.bids.createIndex({ "bidId": 1 }, { unique: true });
+db.bids.createIndex({ "targetType": 1, "targetId": 1 });
+db.bids.createIndex({ "status": 1 });
+db.bids.createIndex({ "bidderId": 1 });
+db.bids.createIndex({ "createdAt": 1 });
+db.bids.createIndex({ "expiresAt": 1 });
+db.bids.createIndex({ "targetType": 1, "targetId": 1, "status": 1 });
+
+-- Sample document structure
+db.bids.insertOne({
+  "bidId": "BID1001",
+  "targetType": "HARVEST",
+  "targetId": "HAR1001",
+  "bidderId": "USR5001",
+  "bidderType": "MERCHANT",
+  "pricePerUnit": NumberDecimal("140.00"),
+  "quantity": 300,
+  "message": "Can collect immediately",
+  "status": "PENDING",
+  "createdBy": "USR5001",
+  "createdAt": ISODate("2026-05-27T10:30:00Z"),
+  "updatedAt": ISODate("2026-05-27T10:30:00Z"),
+  "expiresAt": ISODate("2026-06-03T10:30:00Z")
+});
+
+-- SQL Alternative (for reference, if migrating to PostgreSQL)
+-- CREATE TABLE bids (
+--     id VARCHAR(255) PRIMARY KEY,
+--     bid_id VARCHAR(50) NOT NULL UNIQUE,
+--     target_type VARCHAR(20) NOT NULL,
+--     target_id VARCHAR(50) NOT NULL,
+--     bidder_id VARCHAR(50) NOT NULL,
+--     bidder_type VARCHAR(20) NOT NULL,
+--     price_per_unit DECIMAL(10,2) NOT NULL,
+--     quantity DECIMAL(10,2) NOT NULL,
+--     message TEXT,
+--     status VARCHAR(20) NOT NULL,
+--     created_by VARCHAR(50),
+--     created_at TIMESTAMP NOT NULL,
+--     updated_at TIMESTAMP NOT NULL,
+--     expires_at TIMESTAMP,
+--     FOREIGN KEY (target_id) REFERENCES harvests(harvest_id) ON DELETE CASCADE,
+--     FOREIGN KEY (bidder_id) REFERENCES users(id) ON DELETE CASCADE,
+--     INDEX idx_bid_id (bid_id),
+--     INDEX idx_target (target_type, target_id),
+--     INDEX idx_status (status),
+--     INDEX idx_bidder (bidder_id),
+--     INDEX idx_created (created_at),
+--     INDEX idx_expires (expires_at)
+-- );
