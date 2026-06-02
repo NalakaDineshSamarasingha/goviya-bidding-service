@@ -17,6 +17,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1/bids")
+@CrossOrigin(origins = "*")
 @Tag(name = "Bid Management", description = "APIs for managing bids")
 public class BidController {
 

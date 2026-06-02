@@ -16,7 +16,7 @@ server:
     context-path: /api/goviya-bidding-core
 
 swagger:
-  server-url: http://localhost:8082
+  server-url: http://165.245.191.211:8082
 
 springdoc:
   swagger-ui:

@@ -54,6 +54,13 @@ public class BidService {
             throw new IllegalArgumentException("Invalid target type");
         }
 
+        // Standardize bidder type/role
+        String role = bidder.get().getRole();
+        String bidderType = "FARMER";
+        if ("buyer".equalsIgnoreCase(role) || "merchant".equalsIgnoreCase(role)) {
+            bidderType = "MERCHANT";
+        }
+
         // Create new bid
         String bidId = "BID" + System.currentTimeMillis();
         Bid bid = new Bid(
@@ -61,7 +68,7 @@ public class BidService {
             request.getTargetType(),
             request.getTargetId(),
             bidderId,
-            bidder.get().getRole(),
+            bidderType,
             request.getPricePerUnit(),
             request.getQuantity(),
             request.getMessage()
