@@ -4,19 +4,19 @@ spring:
   boot:
     admin:
       client:
-        url: http://localhost:8082
+        url: http://localhost:9188
         enabled: true
         auto-registration: true
   profiles:
     active: local
 
 server:
-  port: 8082
+  port: 9188
   servlet:
     context-path: /api/goviya-bidding-core
 
 swagger:
-  server-url: http://165.245.191.211:8082
+  server-url: http://52.118.205.242:9188
 
 springdoc:
   swagger-ui:
